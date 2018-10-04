@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>View Flight</title>
+	<STYLE TYPE="text/css">
+	body{
+		font-family:Poppins;
+	}
+	th{
+		padding:12px;
+	    text-align: center;
+	    background-color: #FF9999;
+	    color: white;
+	}
+	TD,TR{
+		border: 1px solid #ddd;
+		text-align: center;
+		padding:8px;
+	}
+	#no-flight{
+		color:red;
+	}
+	</STYLE>
+</head>
+<body>
+	<h2>Flight List</h2>
+	<div th:if="${flight.isEmpty()}">
+		<a id="no-flight">no flight found</a>
+	</div>
+	<div th:if="${!flight.isEmpty()}">
+		<table>
+			<tr>
+				<th>Flight Number</th>
+				<th>Origin</th>
+				<th>Destination</th>
+				<th>Time</th>
+				<th>Pilot</th>
+				<th>Pilot License Number</th>
+				<th>Update</th>
+				<th>Delete</th>
+			</tr>		
+			<tr th:each="f: ${flight}">
+				<td th:text="${f.flightNumber}"></td>
+				<td th:text="${f.origin}"></td>
+				<td th:text="${f.destination}"></td>
+				<td th:text="${f.time}"></td>
+				<td th:text="${f.pilot.name}"></td>
+				<td th:text="${f.pilot.licenseNumber}"></td>
+				<td><a th:href="@{|/flight/update/${f.id}|}">Update</a></td>
+				<td><a th:href="@{|/flight/delete/${f.id}|}">Delete</a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>View Pilot</title>
+	<STYLE TYPE="text/css">
+	body{
+		font-family:Poppins;
+	}
+	th{
+		padding:12px;
+	    text-align: center;
+	    background-color: #FF9999;
+	    color: white;
+	}
+	TD,TR{
+		border: 1px solid #ddd;
+		text-align: center;
+		padding:8px;
+	}
+	#no-flight{
+		color:red;
+	}
+	.button{
+		width:213px;
+		border-radius:50px;
+		
+	}
+	.button:hover{
+		background-color: #ddd;
+	}
+	</STYLE>
+</head>
+<body>
+	<h2>View Pilot</h2>
+	<p th:text="'Pilot License Number : '+ ${pilot.licenseNumber}"></p>
+	<p th:text="'Name : '+ ${pilot.name}"></p>
+	<p th:text="'Fly Hour : '+ ${pilot.flyHour}"></p>
+	<p>Flight : </p>
+	<div th:if="${flight.isEmpty()}">
+		<a id="no-flight">no flight yet</a>
+	</div>
+	<div th:if="${!flight.isEmpty()}">
+		<table>
+			<tr>
+				<th>Nomor Penerbangan</th>
+				<th>Kota Asal</th>
+				<th>Kota Tujuan</th>
+				<th>Waktu</th>
+				<th>Update</th>
+				<th>Hapus</th>
+			</tr>		
+			<tr th:each="f: ${flight}">
+				<td th:text="${f.flightNumber}"></td>
+				<td th:text="${f.origin}"></td>
+				<td th:text="${f.destination}"></td>
+				<td th:text="${f.time}"></td>
+				<td><a th:href="@{|/flight/update/${f.id}|}">Update</a></td>
+				<td><a th:href="@{|/flight/delete/${f.id}|}">Delete</a></td>
+			</tr>
+		</table>
+	</div>
+	<br>
+	<table>
+		<tr>
+		    <td class="button"><a th:href="@{|/flight/add/${pilot.licenseNumber}|}">Add Flight</a></td>
+		    <td class="button"><a th:href="@{|/pilot/update/${pilot.licenseNumber}|}">Update This Pilot</a></td>
+		    <td class="button"><a th:href="@{|/pilot/delete/${pilot.licenseNumber}|}">Delete This Pilot</a></td>
+	    </tr>
+    </table>
+</body>
+</html>

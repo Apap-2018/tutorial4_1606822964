@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Home</title>
+	<STYLE TYPE="text/css">
+	body{
+		font-family:Poppins;
+	}
+	.button{
+		width:100px;
+		border-radius:50px;
+		border: 1px solid #ddd;
+		text-align:center;
+		padding:5px;
+	}
+	.button:hover{
+		background-color: #ddd;
+	}
+	</STYLE>
+</head>
+
+<body>
+	<h2>Hello!</h2>
+	
+	<h3>Tambah Pilot</h3>
+	<table><tr><td class="button"><a th:href="@{/pilot/add}">Tambah</a></td></tr></table>
+	
+	<br>
+	<h3>Cari Pilot berdasarkan Nomor Lisensi</h3>
+	<form th:action="@{/pilot/view}" method="GET">
+		License Number : <br>
+		<input type="text" name="licenseNumber"/>
+		<button type="submit">Cari</button>
+	</form>
+	
+	<br>
+	<h3>Cari Penerbangan berdasarkan Nomor Penerbangan</h3>
+	<form th:action="@{/flight/view}" method="GET">
+		Flight Number : <br>
+		<input type="text" name="flightNumber"/>
+		<button type="submit">Cari</button>
+	</form>
+</body>
+
+</html>
